@@ -5,6 +5,8 @@ describe('02-template-string', () => {
         const name = "Boris"
         const message = getSaludo(name);
 
+        expect(message).toBe(`Hola ${name}`);
+
     })
 
 })
