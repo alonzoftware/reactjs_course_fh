@@ -16,10 +16,10 @@ export const CounterApp = ({ value = 0 }) => {
     return (
         <>
             <h1>Counter App</h1>
-            <h5> {counter} </h5>
+            <h5 id="lbl-result"> {counter} </h5>
             <button onClick={handleButtonAdd}> +1 </button>
             <button onClick={handleButtonSubstract}> -1 </button>
-            <button onClick={handleButtonReset}> RESET </button>
+            <button aria-label="btn-reset" onClick={handleButtonReset}> RESET </button>
         </>
     )
 }
