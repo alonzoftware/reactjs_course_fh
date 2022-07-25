@@ -1,9 +1,9 @@
-import { Fragment } from "react"
-const newMessage = {
+
+export const newMessage = {
     msg: "This is the Message",
     from: "Fernando",
 }
-const getNotAsyncFunction = (a: number, b: number) => {
+export const getNotAsyncFunction = (a = 0, b = 0) => {
     return a + b;
 }
 export const FirstApp = ({ title = "", subTitle = 0 }) => {
@@ -16,13 +16,5 @@ export const FirstApp = ({ title = "", subTitle = 0 }) => {
             <code>{JSON.stringify(newMessage)}</code>
             <p>{getNotAsyncFunction(1, 8)}</p>
         </>
-    )
-}
-export const FirstAppFragment = () => {
-    return (
-        <Fragment>
-            <h1>First App</h1>
-            <p>Soy un Subtitulo</p>
-        </Fragment>
     )
 }
