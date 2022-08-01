@@ -1,0 +1,13 @@
+import { iImg } from "../helpers/get-gifs"
+
+
+export const GifItem = (image: iImg) => {
+
+    return (
+        <div className="card">
+
+            <img src={image.url} alt={image.title} />
+            <p>{image.title}</p>
+        </div>
+    )
+}
