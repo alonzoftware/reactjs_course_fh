@@ -1,4 +1,4 @@
-
+import 'cross-fetch/polyfill';
 export interface iGiphyResponse {
   id: number;
   title: string;

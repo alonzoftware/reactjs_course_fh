@@ -20,7 +20,7 @@ export const AddCategory = (props: iProps) => {
         onNewCategory(inputValue.trim());
     }
     return (
-        <form onSubmit={event => onSubmit(event)}>
+        <form onSubmit={event => onSubmit(event)} aria-label="formMain">
 
             <input
                 type="text"
@@ -29,10 +29,6 @@ export const AddCategory = (props: iProps) => {
                 onChange={event => onInputChange(event.target.value)}
             />
         </form>
-
-
     )
-
-
 }
 
