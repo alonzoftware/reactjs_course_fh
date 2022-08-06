@@ -9,7 +9,7 @@ interface iFormState {
 
 export const FormWithCustomHook = () => {
 
-    const { formState, onInputChange } = useForm({
+    const { formState, onInputChange, onResetForm } = useForm({
         user: '', email: '', pass: ''
     })
 
@@ -22,9 +22,9 @@ export const FormWithCustomHook = () => {
     //     console.log(formState);
     // }, [formState]);
 
-    useEffect(() => {
-        console.log('Email: ', email);
-    }, [email]);
+    // useEffect(() => {
+    //     console.log('Email: ', email);
+    // }, [email]);
 
 
     return (
@@ -55,6 +55,9 @@ export const FormWithCustomHook = () => {
                 value={pass}
                 onChange={onInputChange}
             />
+            <button className='btn btn-primary mt-2'
+                onClick={onResetForm}
+            >RESET</button>
         </>
     );
 }
