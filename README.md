@@ -1,5 +1,9 @@
 # reactjs_course_fh
 
+## HOOKS DOCUMENTATION
+
+https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
+
 # Dependencies
 
     "@babel/core": "^7.18.9",

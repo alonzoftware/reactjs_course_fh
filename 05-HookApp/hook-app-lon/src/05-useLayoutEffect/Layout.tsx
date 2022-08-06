@@ -1,12 +1,12 @@
 import { useCounter, useFetch } from "../hooks/";
-import { LoadingQuote, Quote } from './';
+import { LoadingQuote, Quote } from '../03-examples';
 
 interface iData {
     author: string,
     quote: string
 }
 
-export const MultipleCustomHooks = () => {
+export const Layout = () => {
 
 
     const { counter, increment } = useCounter(1);
@@ -36,8 +36,8 @@ export const MultipleCustomHooks = () => {
                 ) :
                     <Quote quote={quote} author={author} />
             }
-
-            <button className="btn btn-primary"
+            <br />
+            <button className="btn btn-primary mt-2"
                 disabled={isLoading}
                 onClick={() => increment(1)}>
                 Next Quote
