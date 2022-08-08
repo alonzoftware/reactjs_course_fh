@@ -11,7 +11,13 @@ export const TodoAdd = ({ onAddTodo }: { onAddTodo: Function }) => {
         if (inputValue.trim().length <= 1) return
         // setCategory(category => [inputValue, ...category]);
         setInputValue("");
-        onAddTodo(inputValue.trim());
+        const newTodo = {
+            id: new Date().getTime(),
+            descrip: inputValue.trim(),
+            done: false
+        }
+
+        onAddTodo(newTodo);
     }
 
     return (

@@ -7,19 +7,17 @@ export interface iTodo {
     done: boolean
 }
 
-export const TodoList = ({ todos }: { todos: iTodo[] }) => {
+export const TodoList = ({ todos, onDelItem, onToggleItem }: { todos: iTodo[], onDelItem: Function, onToggleItem: Function }) => {
 
-    const onDelItemHandler = useCallback(
-        (id: number) => {
-            console.log('Delete Item' + id)
-        },
-        [],
-    )
+
     return (
         <ul className='list-group'>
             {
                 todos.map((todo: iTodo) => (
-                    <TodoItem key={todo.id} {...todo} onDelItem={onDelItemHandler} />
+                    <TodoItem key={todo.id} {...todo}
+                        onDelItem={onDelItem}
+                        onToggleItem={onToggleItem}
+                    />
                 )
                 )
 

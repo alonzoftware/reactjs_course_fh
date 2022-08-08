@@ -4,13 +4,16 @@ interface iProps {
     descrip: string,
     done: boolean,
     onDelItem: Function
+    onToggleItem: Function
 }
-export const TodoItem = ({ id, descrip, done, onDelItem }: iProps) => {
+export const TodoItem = ({ id, descrip, done, onDelItem, onToggleItem }: iProps) => {
 
     return (
         <li className='list-group-item d-flex justify-content-between'>
 
-            <span className='align-self-center'>descrip</span>
+            <span className={`align-self-center ${done ? 'text-decoration-line-through' : ''}`}
+                onClick={() => onToggleItem(id)}
+            >{descrip}</span>
             <button className='btn btn-danger'
                 onClick={() => onDelItem(id)}
             >Borrar</button>
