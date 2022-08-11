@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from "react-router-dom";
 // import { CounterApp } from './01-useState/CounterApp'
 // import { CounterWithCustomHook } from './01-useState/CounterWithCustomHook'
 // import { FormWithCustomHook } from './02-useEfect/FormWithCustomHook'
@@ -17,6 +18,8 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   //<React.StrictMode>
-  <TodoApp />
+  <BrowserRouter>
+    <TodoApp />
+  </BrowserRouter>
   //</React.StrictMode> 
 )
