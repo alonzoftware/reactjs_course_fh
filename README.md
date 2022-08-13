@@ -6,6 +6,14 @@ https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
 
 # Dependencies
 
+    "react-router-dom": "^6.3.0"
+
+```console
+npm i react-router-dom"
+```
+
+# Dev Dependencies
+
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
     "@babel/preset-react": "^7.18.6",

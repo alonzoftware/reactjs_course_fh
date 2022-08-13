@@ -13,13 +13,14 @@ import { BrowserRouter } from "react-router-dom";
 // import { MemoHook } from './06-memorize/MemoHook'
 // import { Memorize } from './06-memorize/Memorize'
 // import { Padre } from './07-tarea-memo/Padre'
-import { TodoApp } from './08-useReducer/TodoApp'
+// import { TodoApp } from './08-useReducer/TodoApp'
+import { MainApp } from './09-useContext/MainApp';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   //<React.StrictMode>
   <BrowserRouter>
-    <TodoApp />
+    <MainApp />
   </BrowserRouter>
   //</React.StrictMode> 
 )
