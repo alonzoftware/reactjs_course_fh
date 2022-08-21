@@ -1,26 +1,26 @@
 {
-    "presets": [
-      [
-        "@babel/preset-typescript", // <---
-        {
-          "preset-env": {
-            "modules": "commonjs"
-          }
+  "presets": [
+    [
+      "@babel/preset-typescript", // <---
+      {
+        "preset-env": {
+          "modules": "commonjs"
         }
-      ],
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "esmodules": true
-          }
+      }
+    ],
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
         }
-      ],
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "automatic"
-        }
-      ]
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
     ]
-  }
+  ]
+}

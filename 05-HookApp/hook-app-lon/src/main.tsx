@@ -18,9 +18,9 @@ import { MainApp } from './09-useContext/MainApp';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  //<React.StrictMode>
+  // <React.StrictMode>
   <BrowserRouter>
     <MainApp />
   </BrowserRouter>
-  //</React.StrictMode> 
+  // </React.StrictMode>
 )
