@@ -1,3 +1,5 @@
+
+import 'cross-fetch/polyfill';
 import { useEffect, useState } from "react";
 
 export const useFetch = (url: string) => {

@@ -33,7 +33,7 @@ npm i --save-dev @babel/core @babel/preset-env @babel/preset-react @babel/preset
 
 jest.config.cjs
 
-```json
+```javascript
 module.exports = {
   testEnvironment: "jest-environment-jsdom",
   // Jest transformations -- this adds support for TypeScript
@@ -61,8 +61,6 @@ module.exports = {
   // Module file extensions for importing
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 };
-
-
 ```
 
 FILE IN ROOT : .babelrc
@@ -94,4 +92,16 @@ FILE IN ROOT : .babelrc
     ]
   ]
 }
+```
+
+import fetch
+
+```code
+import 'cross-fetch/polyfill';
+```
+
+change TEST SCRIPT
+
+```json
+"test": "jest --watchAll --detectOpenHandles"
 ```
