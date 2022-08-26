@@ -18,6 +18,7 @@ https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
 
 ```console
 npm i react-router-dom
+npm install react-router-dom@6
 ```
 
 # Dev Dependencies
