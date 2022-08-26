@@ -1,5 +1,13 @@
 # reactjs_course_fh
 
+## Create VITE PROJECT
+
+https://vitejs.dev/guide/#trying-vite-online
+
+```console
+npm create vite@latest
+```
+
 ## HOOKS DOCUMENTATION
 
 https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
@@ -9,7 +17,7 @@ https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
     "react-router-dom": "^6.3.0"
 
 ```console
-npm i react-router-dom"
+npm i react-router-dom
 ```
 
 # Dev Dependencies
@@ -103,9 +111,28 @@ import 'cross-fetch/polyfill';
 change TEST SCRIPT
 
 ```json
-"test": "jest --watchAll --detectOpenHandles"
+"test": "jest --watch --detectOpenHandles"
+"testall": "jest --watchAll --detectOpenHandles"
 ```
 
 # TESTING NOTES
 
 https://github.com/alonzoftware/reactjs_course_fh/blob/master/04-GifExpertApp/gif-expert-lon/tests/components/GifGrid.test.tsx
+
+# BOOTSTRAP
+
+https://getbootstrap.com/docs/5.2/getting-started/download/
+
+```html
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+  crossorigin="anonymous"
+/>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+  crossorigin="anonymous"
+></script>
+```
