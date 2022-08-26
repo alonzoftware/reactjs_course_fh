@@ -105,3 +105,7 @@ change TEST SCRIPT
 ```json
 "test": "jest --watchAll --detectOpenHandles"
 ```
+
+# TESTING NOTES
+
+https://github.com/alonzoftware/reactjs_course_fh/blob/master/04-GifExpertApp/gif-expert-lon/tests/components/GifGrid.test.tsx

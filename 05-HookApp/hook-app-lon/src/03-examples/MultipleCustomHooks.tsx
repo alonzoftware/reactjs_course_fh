@@ -5,6 +5,11 @@ interface iData {
     author: string,
     quote: string
 }
+export interface iUseFetchData {
+    data: null | any,
+    isLoading: boolean,
+    hasError: any
+}
 
 export const MultipleCustomHooks = () => {
 
