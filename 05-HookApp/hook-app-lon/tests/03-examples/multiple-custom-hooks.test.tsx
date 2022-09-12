@@ -38,7 +38,7 @@ describe('Test <MultipleCustomHooks />', () => {
 
         const nextButton = screen.getByRole('button', { name: 'Next Quote' });
         expect(nextButton).toHaveAttribute('disabled');
-        // screen.debug();
+        //screen.debug();
 
     });
 

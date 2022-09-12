@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { TodoItem } from "./TodoItem"
 
 export interface iTodo {
-    id: number,
+    id: number ,
     descrip: string,
     done: boolean
 }
