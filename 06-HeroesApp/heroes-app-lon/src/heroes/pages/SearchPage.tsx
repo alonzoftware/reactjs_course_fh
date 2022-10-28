@@ -3,6 +3,7 @@ import { HeroCard } from "../components";
 import { useForm } from '../../hooks/useForm';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { getHeroesByName } from '../helpers';
+import { heroes } from '../data/heroes';
 
 interface iFormState {
     searchText: string
@@ -14,6 +15,9 @@ export const SearchPage = () => {
     // console.log(location);
     let { q = "" } = queryString.parse(location.search) as { q: string };
     const heroes = getHeroesByName(q);
+
+    const showSearch = (q.length === 0);
+    const showError = (q.length !== 0) && heroes.length === 0;
 
     // const { formState, onInputChange, onResetForm } = useForm({ searchText: '' });
     const { formState, onInputChange, onResetForm } = useForm({ searchText: q });
@@ -63,15 +67,29 @@ export const SearchPage = () => {
                 <div className="col-7">
                     <h4>Results</h4>
                     <hr />
+                    {
+                        // (q === '')
+                        //     ?
+                        //     <div className="alert alert-primary">
+                        //         Search a hero
 
-                    <div className="alert alert-primary">
+                        //     </div>
+
+                        //     : (heroes.length === 0) &&
+                        //     <div className="alert alert-danger">
+                        //         No hero with <b>{q}</b>
+                        //     </div>
+                    }
+
+
+                    <div className="alert alert-primary animate__animated animate__fadeIn" style={{ display: showSearch ? '' : 'none' }}>
                         Search a hero
-
                     </div>
-                    <div className="alert alert-danger">
+
+                    <div className="alert alert-danger animate__animated animate__fadeIn" style={{ display: showError ? '' : 'none' }}>
                         No hero with <b>{q}</b>
                     </div>
-                    {/* TODO: Implement HeroCard */}
+
                     {heroes.map((hero) => (
                         <HeroCard key={hero.id} {...hero} />
                         // <li className='list-group-item d-flex justify-content-between' key={hero.id}>
