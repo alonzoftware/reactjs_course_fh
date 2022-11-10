@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { AuthContext } from './AuthContext'
 import { authReducer } from './authReducer';
 
@@ -13,9 +13,9 @@ const initialState = {
     logged: false,
 }
 
-export const UserProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const AuthProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     // const [user, setUser] = useState(userIni);
-    const [state, dispatch] = authReducer(authReducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     return (
         // <AuthContext.Provider value={{ user, setUser }}>

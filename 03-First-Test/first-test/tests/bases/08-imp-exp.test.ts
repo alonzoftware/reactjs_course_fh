@@ -1,4 +1,6 @@
 import { getHeroeById, getHeroesByOwner } from "../../src/bases/08-imp-exp";
+import heroesData from "../../src/bases/data/heroes";
+
 describe('08-imp-exp', () => {
     test('getHeroeById', () => {
         const heroTest = { id: 1, name: 'Batman', owner: 'DC' };
@@ -18,6 +20,9 @@ describe('08-imp-exp', () => {
 
         expect(getHeroesByOwner('DC').length).toBe(3);
         expect(heroTestArray).toEqual(getHeroesByOwner('DC'));
+
+        const heroes = getHeroesByOwner("Marvel");
+        expect(heroes).toEqual(heroesData.filter((heroe) => heroe.owner === "Marvel"));
     })
 
 })

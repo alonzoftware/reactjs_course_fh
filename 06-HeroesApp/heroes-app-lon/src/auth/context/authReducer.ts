@@ -3,8 +3,11 @@ import { types } from "../types/types";
 const initialState = {
     logged: false,
 }
-
-export const authReducer = (state = {}, action) => {
+export interface iActionTodo {
+    type: string,
+    payload: string
+}
+export const authReducer = (state = {}, action: iActionTodo) => {
     switch (action.type) {
         case types.login:
             return {
