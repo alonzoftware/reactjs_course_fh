@@ -1,8 +1,9 @@
 
 
 import { useReducer, useState } from 'react';
+import { types } from '../types/types';
 import { AuthContext } from './AuthContext'
-import { authReducer } from './authReducer';
+import { authReducer, iActionAuth } from './authReducer';
 
 // const userIni: iUser = {
 //     email: "",
@@ -15,11 +16,25 @@ const initialState = {
 
 export const AuthProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     // const [user, setUser] = useState(userIni);
-    const [state, dispatch] = useReducer(authReducer, initialState);
+    const [authState, dispatch] = useReducer(authReducer, initialState);
+
+    const login = (name = '') => {
+        const action: iActionAuth = {
+            type: types.login,
+            payload: {
+                id: 'ABC',
+                name: name
+            }
+        }
+        dispatch(action);
+    }
 
     return (
         // <AuthContext.Provider value={{ user, setUser }}>
-        <AuthContext.Provider value={{}}>
+        <AuthContext.Provider value={{
+            ...authState,
+            login: login
+        }}>
             {children}
         </AuthContext.Provider>
     )

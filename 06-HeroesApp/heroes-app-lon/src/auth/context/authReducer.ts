@@ -1,13 +1,13 @@
-import { types } from "../types/types";
+import { types, iTypes } from '../types/types';
 
 const initialState = {
     logged: false,
 }
-export interface iActionTodo {
+export interface iActionAuth {
     type: string,
-    payload: string
+    payload: { id: string, name: string }
 }
-export const authReducer = (state = {}, action: iActionTodo) => {
+export const authReducer = (state = {}, action: iActionAuth) => {
     switch (action.type) {
         case types.login:
             return {
