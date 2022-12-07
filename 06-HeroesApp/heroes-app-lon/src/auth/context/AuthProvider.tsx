@@ -12,19 +12,54 @@ const initialState = {
     user: { id: '', name: '' },
     logged: false,
 }
+const initialStateFunction = () => {
+
+    if (localStorage.getItem('user')) {
+        const userStr = localStorage.getItem('user')!;
+        const user = JSON.parse(userStr);
+
+        return {
+            user,
+            logged: !!user
+        };
+    } else {
+        return initialState;
+    }
+
+}
+
+
 
 export const AuthProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     // const [user, setUser] = useState(userIni);
-    const [authState, dispatch] = useReducer(authReducer, initialState);
+    const [authState, dispatch] = useReducer(authReducer, initialState, initialStateFunction);
 
     const login = (name = '') => {
+
+        const user = {
+            id: 'ABC',
+            name: name
+        }
+
         const action: iAuthAction = {
             type: types.login,
-            payload: {
-                id: 'ABC',
-                name: name
-            }
+            payload: user
         }
+
+        localStorage.setItem('user', JSON.stringify(user));
+        dispatch(action);
+    }
+
+    const logout = () => {
+        const user = {
+            id: '',
+            name: ''
+        }
+        const action: iAuthAction = {
+            type: types.logout,
+            payload: user,
+        }
+        localStorage.removeItem('user');
         dispatch(action);
     }
 
@@ -32,7 +67,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element | JSX.Element
         // <AuthContext.Provider value={{ user, setUser }}>
         <AuthContext.Provider value={{
             ...authState,
-            login: login
+            login: login,
+            logout: logout,
         }}>
             {children}
         </AuthContext.Provider>

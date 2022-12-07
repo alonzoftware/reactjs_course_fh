@@ -6,7 +6,8 @@ export interface AuthContextState {
     // set the type of state you want to handle with context e.g.
     user: { id: string, name: string },
     logged: boolean,
-    login: Function //React.Dispatch<React.SetStateAction<iUser>> // Function
+    login: Function, //React.Dispatch<React.SetStateAction<iUser>> // Function
+    logout: Function //React.Dispatch<React.SetStateAction<iUser>> // Function
 }
 // export const UserContext = createContext({} as ContextState);
 
