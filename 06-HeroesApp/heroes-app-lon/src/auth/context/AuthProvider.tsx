@@ -1,9 +1,7 @@
-
-
 import { useReducer, useState } from 'react';
 import { types } from '../types/types';
 import { AuthContext } from './AuthContext'
-import { authReducer, iActionAuth } from './authReducer';
+import { authReducer, iAuthAction } from './authReducer';
 
 // const userIni: iUser = {
 //     email: "",
@@ -11,6 +9,7 @@ import { authReducer, iActionAuth } from './authReducer';
 //     name: "",
 // }
 const initialState = {
+    user: { id: '', name: '' },
     logged: false,
 }
 
@@ -19,7 +18,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element | JSX.Element
     const [authState, dispatch] = useReducer(authReducer, initialState);
 
     const login = (name = '') => {
-        const action: iActionAuth = {
+        const action: iAuthAction = {
             type: types.login,
             payload: {
                 id: 'ABC',
