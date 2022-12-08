@@ -6,9 +6,15 @@ export const LoginPage = () => {
     const navigate = useNavigate();
     const onLogin = () => {
         login('Alonzo Choque');
-        navigate('/', {
+
+        let lastPath = '/'
+        if (localStorage.getItem('user')) {
+            lastPath = localStorage.getItem('lastPath')!;
+        }
+        navigate(lastPath, {
             replace: true
         })
+
     }
     return (
         <div className="container mt-5">
