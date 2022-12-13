@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest --watch --detectOpenHandles"
   },
   "dependencies": {
     "query-string": "^7.1.1",
