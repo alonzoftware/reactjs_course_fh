@@ -21,6 +21,7 @@ export const authReducer = (state: iAuthState, action: iAuthAction) => {
             return {
                 ...state,
                 logged: false,
+                user: { id: '', name: '' }
             };
 
         default:
