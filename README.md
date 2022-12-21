@@ -40,38 +40,6 @@ npm install react-router-dom@6
 npm i --save-dev @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript @testing-library/react @testing-library/jest-dom @types/jest babel-jest cross-fetch jest jest-environment-jsdom ts-jest
 ```
 
-jest.config.cjs
-
-```javascript
-module.exports = {
-  testEnvironment: "jest-environment-jsdom",
-  // Jest transformations -- this adds support for TypeScript
-  // using ts-jest
-  // The root of your source code, typically /src
-  // `<rootDir>` is a token Jest substitutes
-  //roots: ["<rootDir>/src"],
-
-  // Jest transformations -- this adds support for TypeScript
-  // using ts-jest
-  transform: {
-    "^.+\\.tsx?$": "ts-jest",
-  },
-
-  // Runs special logic, such as cleaning up components
-  // when using React Testing Library and adds special
-  // extended assertions to Jest
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
-
-  // Test spec file resolution pattern
-  // Matches parent folder `__tests__` and filename
-  // should contain `test` or `spec`.
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-
-  // Module file extensions for importing
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-};
-```
-
 FILE IN ROOT : .babelrc
 
 ```json
@@ -101,6 +69,50 @@ FILE IN ROOT : .babelrc
     ]
   ]
 }
+```
+
+FILE IN ROOT : babel.config.ts
+
+```javascript
+module.exports = {
+  presets: [
+    ["@babel/preset-env", { targets: { node: "current" } }],
+    "@babel/preset-typescript",
+    "@babel/react",
+  ],
+};
+```
+
+FILE IN ROOT : jest.config.cjs
+
+```javascript
+module.exports = {
+  testEnvironment: "jest-environment-jsdom",
+  // Jest transformations -- this adds support for TypeScript
+  // using ts-jest
+  // The root of your source code, typically /src
+  // `<rootDir>` is a token Jest substitutes
+  roots: ["<rootDir>/src"],
+
+  // Jest transformations -- this adds support for TypeScript
+  // using ts-jest
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+  },
+
+  // Runs special logic, such as cleaning up components
+  // when using React Testing Library and adds special
+  // extended assertions to Jest
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+
+  // Test spec file resolution pattern
+  // Matches parent folder `__tests__` and filename
+  // should contain `test` or `spec`.
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+
+  // Module file extensions for importing
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+};
 ```
 
 import fetch
