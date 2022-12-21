@@ -12,8 +12,8 @@ interface iFormState {
 export const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log(location);
-    let { q = "" } = queryString.parse(location.search) as { q: string };
+    //console.log(location);
+    let { q = "" } = queryString.parse(location.search)  as { q: string } ;
     const heroes = getHeroesByName(q);
 
     const showSearch = (q.length === 0);
