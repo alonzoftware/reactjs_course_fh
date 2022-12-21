@@ -1,4 +1,4 @@
-import queryString from "query-string";
+// import queryString from "query-string";
 import { HeroCard } from "../components";
 import { useForm } from '../../hooks/useForm';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
@@ -12,8 +12,12 @@ interface iFormState {
 export const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    //console.log(location);
-    let { q = "" } = queryString.parse(location.search)  as { q: string } ;
+    // console.log(location);
+    // let { q = "" } = queryString.parse(location.search) as { q: string };
+
+    let q = new URLSearchParams(location.search).get('q') ?? "";
+    console.log(q);
+
     const heroes = getHeroesByName(q);
 
     const showSearch = (q.length === 0);
@@ -45,7 +49,7 @@ export const SearchPage = () => {
                 <div className="col-5">
                     <h4>Searching</h4>
                     <hr />
-                    <form onSubmit={onSearchSubmit}>
+                    <form aria-label="form" onSubmit={onSearchSubmit}>
 
                         <input
                             type="text"
@@ -86,7 +90,7 @@ export const SearchPage = () => {
                         Search a hero
                     </div>
 
-                    <div className="alert alert-danger animate__animated animate__fadeIn" style={{ display: showError ? '' : 'none' }}>
+                    <div aria-label="alert-danger" className="alert alert-danger animate__animated animate__fadeIn" style={{ display: showError ? '' : 'none' }}>
                         No hero with <b>{q}</b>
                     </div>
 
