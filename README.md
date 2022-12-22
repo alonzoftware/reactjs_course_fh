@@ -92,7 +92,7 @@ module.exports = {
   // using ts-jest
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
-  roots: ["<rootDir>/src"],
+  // roots: ["<rootDir>/src"],
 
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
@@ -148,4 +148,23 @@ https://getbootstrap.com/docs/5.2/getting-started/download/
   integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
   crossorigin="anonymous"
 ></script>
+```
+
+# MATERIAL UI
+
+https://mui.com/
+
+```console
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+
+```
+
+Add to index.html
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+/>
 ```
