@@ -19,6 +19,7 @@ https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
 ```console
 npm i react-router-dom
 npm install react-router-dom@6
+npm install @reduxjs/toolkit react-redux
 ```
 
 # Dev Dependencies
@@ -167,4 +168,12 @@ Add to index.html
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 />
+```
+
+# REDUX
+
+https://redux-toolkit.js.org/tutorials/quick-start
+
+```console
+npm install @reduxjs/toolkit react-redux
 ```
