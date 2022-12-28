@@ -1,14 +1,34 @@
-import { ThunkAction, Action } from "@reduxjs/toolkit";
-import { store } from "../store";
+// This is required to fix redux thunk errors introduced with react-redux version 8
+import { ThunkAction } from '@reduxjs/toolkit'
+import 'redux'
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+declare module 'redux' {
+    /**
+     * Overload for bindActionCreators redux function, returns expects responses
+     * from thunk actions
+     */
+    function bindActionCreators<
+        ActionCreators extends ActionCreatorsMapObject<any>
+    >(
+        actionCreators: ActionCreators,
+        dispatch: Dispatch
+    ): {
+            [ActionCreatorName in keyof ActionCreators]: ReturnType<
+                ActionCreators[ActionCreatorName]
+            > extends ThunkAction<any, any, any, any>
+            ? (
+                ...args: Parameters<ActionCreators[ActionCreatorName]>
+            ) => ReturnType<ReturnType<ActionCreators[ActionCreatorName]>>
+            : ActionCreators[ActionCreatorName]
+        }
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-    ReturnType,
-    RootState,
-    unknown,
-    Action<string>
->
+    /*
+     * Overload to add thunk support to Redux's dispatch() function.
+     * Useful for react-redux or any other library which could use this type.
+     */
+    export interface Dispatch<A extends Action = AnyAction> {
+        <ReturnType = any, State = any, ExtraThunkArg = any>(
+            thunkAction: ThunkAction<ReturnType, State, ExtraThunkArg, A>
+        ): ReturnType
+    }
+}

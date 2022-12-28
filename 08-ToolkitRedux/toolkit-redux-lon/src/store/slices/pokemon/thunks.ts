@@ -1,4 +1,5 @@
-import { AppDispatch, RootState } from "../../types";
+
+import { AppDispatch, RootState } from "../../store";
 import { startLoadingPokemons } from "./pokemonSlice"
 
 export const getPokemons = (page = 0) => {
