@@ -1,11 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+export interface Pokemon {
+    name: string,
+    url: string
+}
+
 export interface PokemonState {
     page: number,
-    pokemons: string[],
+    pokemons: Pokemon[],
     isLoading: boolean
 
+}
+export interface PokemonPayload {
+    page: number,
+    pokemons: Pokemon[],
 }
 
 const initialState: PokemonState = {
@@ -25,9 +34,12 @@ export const pokemonSlice = createSlice({
             // immutable state based off those changes
             state.isLoading = true;
         },
-        setPokemons: (state, action: PayloadAction<number>) => {
+        setPokemons: (state, action: PayloadAction<PokemonPayload>) => {
             // state.page += action.payload;
-            console.log(action);
+            state.isLoading = false;
+            state.page = action.payload.page;
+            state.pokemons = action.payload.pokemons;
+
         },
     },
 })
