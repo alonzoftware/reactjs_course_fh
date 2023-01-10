@@ -7,7 +7,7 @@ import { getPokemons } from './store/slices/pokemon/thunks';
 
 export const PokemonApp = () => {
 
-    const { page, pokemons, isLoading } = useSelector((state: RootState) => state.pokemons);
+    const { page, pokemons = [], isLoading } = useSelector((state: RootState) => state.pokemons);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPokemons());
