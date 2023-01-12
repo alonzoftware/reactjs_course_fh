@@ -4,6 +4,13 @@
 // import { MaybePromise } from '@reduxjs/toolkit/dist/query/tsHelpers';
 // import { BaseQueryApi, BaseQueryFn, createApi, EndpointDefinitions, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export interface iTodo {
+    userId: number,
+    id: number,
+    title: string,
+    completed: boolean
+}
 export const todosApi = createApi({
     reducerPath: 'todos',
 
@@ -20,10 +27,40 @@ export const todosApi = createApi({
     // }
 
     endpoints: (builder) => ({
-        getTodos: builder.query({
+        getTodos: builder.query<any, number>({
             query: () => '/todos'
         })
     })
 })
 
 export const { useGetTodosQuery } = todosApi;
+
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// const baseUrl = 'xxxxxxx';
+
+// export const postsApi = createApi({
+//   reducerPath: 'posts',
+//   baseQuery: fetchBaseQuery({ baseUrl }),
+//   endpoints: (builder) => ({
+//     getPostsByYear: builder.query<any, { start: string; end: string }>({
+//       query: (arg) => {
+//         const { start, end } = arg;
+//         console.log('arg: ', arg);
+//         return {
+//           url: 'posts/',
+//           params: { start, end },
+//         };
+//       },
+//     }),
+//   }),
+// });
+
+// export const { useGetPostsByYearQuery } = postsApi;
+
+// import { useGetPostsByYearQuery } from './hooks';
+
+// export default function App() {
+//   const { data, error, isLoading } = useGetPostsByYearQuery({ start: '2019', end: '2021' });
+//   return <div>app</div>;
+// }

@@ -1,13 +1,9 @@
 import { useGetTodosQuery } from "./store/rtk_apis";
-interface iTodo {
-    userId: number,
-    id: number,
-    title: string,
-    completed: boolean
-}
+import { iTodo } from './store/rtk_apis/todosApi';
+
 export const TodoApp = () => {
 
-    const { data: todos = [], isLoading } = useGetTodosQuery();
+    const { data: todos = [], isLoading } = useGetTodosQuery(0);
     return (
         <>
             <h1>Todos - RTK Query</h1>
@@ -15,9 +11,9 @@ export const TodoApp = () => {
             <h4>isLoading: {isLoading ? 'TRUE' : 'FALSE'}</h4>
             <pre>...</pre>
             <ul>
-                {todos.map(todo => (
+                {todos.map((todo: iTodo) => (
                     <li key={todo.id}>
-                        <strong>{todo.completed ? 'DONE' : 'PENDING'}</strong>
+                        <strong>{todo.completed ? 'DONE ' : 'PENDING '}</strong>
                         {todo.title}
                     </li>))}
 
