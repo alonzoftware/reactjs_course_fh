@@ -29,11 +29,15 @@ export const todosApi = createApi({
     endpoints: (builder) => ({
         getTodos: builder.query<any, number>({
             query: () => '/todos'
-        })
+        }),
+        getTodo: builder.query<any, number>({
+            query: (todoId) => `/todos/${todoId}`
+        }),
+
     })
 })
 
-export const { useGetTodosQuery } = todosApi;
+export const { useGetTodosQuery, useGetTodoQuery } = todosApi;
 
 // import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
