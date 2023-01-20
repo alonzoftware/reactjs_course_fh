@@ -3,6 +3,9 @@ import Google from "@mui/icons-material/Google";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { checkingAuthentication,startGoogleSignIn } from '../../store/auth';
 
 interface iFormState {
     email: string,
@@ -16,12 +19,22 @@ const { formState, onInputChange, onResetForm } = useForm({
 });
 const { email, pass } = formState as iFormState;
 
+const { status } = useSelector((state: RootState) => state.auth);
+const dispatch = useDispatch();
+// useEffect(() => {
+//     dispatch(getPokemons());
+// }, []);
+
+
+
 const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log ({email, pass});
+    dispatch(checkingAuthentication(email, pass));
 }
 const onGoogleSignIn = ()=>{
     console.log('onGoogleSignIn')
+    dispatch(startGoogleSignIn());
 }
     return (
         <AuthLayout title='Login'>
