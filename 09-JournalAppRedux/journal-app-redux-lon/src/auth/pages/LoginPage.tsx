@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Google from "@mui/icons-material/Google";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
@@ -13,13 +14,15 @@ interface iFormState {
 }
 
 export const LoginPage = () => {
+const { status } = useSelector((state: RootState) => state.auth);
+const isAuthenticating = useMemo(()=> status === 'checking', [status]);
+
 const { formState, onInputChange, onResetForm } = useForm({
     email: 'alonzo.choque@gmail.com', 
     pass: '1234567'
 });
 const { email, pass } = formState as iFormState;
 
-const { status } = useSelector((state: RootState) => state.auth);
 const dispatch = useDispatch();
 // useEffect(() => {
 //     dispatch(getPokemons());
@@ -65,12 +68,17 @@ const onGoogleSignIn = ()=>{
 
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
                         <Grid item xs={12} sm={6}>
-                            <Button type='submit' variant="contained" fullWidth>
+                            <Button
+                            disabled={isAuthenticating} 
+                            type='submit' 
+                            variant="contained" 
+                            fullWidth>
                                 Login
                             </Button>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Button 
+                            disabled={isAuthenticating} 
                             onClick={onGoogleSignIn}
                             variant="contained" fullWidth>
                                 <Google />

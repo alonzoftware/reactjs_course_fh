@@ -1,5 +1,6 @@
 import { AppDispatch, RootState } from "../../store";
-import { checkingCredentials } from "./authSlice";
+import { checkingCredentials, login, logout } from "./authSlice";
+import { signInWithGoogle } from '../../firebase/providers';
 
 export const checkingAuthentication = (email = '', pass = '') => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -27,6 +28,17 @@ export const checkingAuthentication = (email = '', pass = '') => {
 export const startGoogleSignIn = () => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
         dispatch(checkingCredentials());
+        const result = await signInWithGoogle();
+        if (!result.ok) dispatch (logout({errorMessage : result.errorMessage}));
+        
+        dispatch(login(
+            {
+                uid:result.uid!,
+                email:result.email!,
+                displayName:result.displayName!,
+                photoURL:result.photoURL!,
+            }
+        ));
     }
 
 }

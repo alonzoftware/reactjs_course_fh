@@ -3,21 +3,21 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface authState {
     status: string,
-    uid: any,
-    email : any,
-    displayName: any,
-    photoURL: any,
-    errorMessage: any,
+    uid: string,
+    email : string,
+    displayName: string,
+    photoURL: string,
+    errorMessage: string,
 
 }
 
 const initialState: authState = {
     status: 'not-authenticated', //'checking','not-authenticated', 'authenticated'
-    uid: null,
-    email : null,
-    displayName: null,
-    photoURL: null,
-    errorMessage: null,
+    uid: '',
+    email : '',
+    displayName: '',
+    photoURL: '',
+    errorMessage: '',
 
 }
 
@@ -26,11 +26,21 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         
-        login: (state, action: PayloadAction<number>) => {
-            // state.auth += action.payload
+        login: (state, action: PayloadAction<{uid : string, email : string , displayName : string, photoURL : string}>) => {
+            state.status= 'authenticated';
+            state.uid= action.payload.uid;
+            state.email = action.payload.email ;
+            state.displayName= action.payload.displayName;
+            state.photoURL= action.payload.photoURL;
+            state.errorMessage= '';
         },
-        logout: (state, action: PayloadAction<number>) => {
-            // state.auth += action.payload
+        logout: (state, action: PayloadAction<{errorMessage : string }>) => {
+            state.status= 'not-authenticated';
+            state.uid= '';
+            state.email = '';
+            state.displayName= '';
+            state.photoURL= '';
+            state.errorMessage= action.payload.errorMessage;
         },
         checkingCredentials: (state) =>{
             state.status = 'checking';
