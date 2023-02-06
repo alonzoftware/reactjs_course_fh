@@ -1,25 +1,39 @@
 import { Link as RouterLink } from 'react-router-dom';
 import Google from "@mui/icons-material/Google";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useMemo } from 'react';
+import { startCreatingUserWithEmailPassword } from '../../store/auth';
 
 interface iFormState {
+    isSubmited: boolean,
     email: string,
     pass: string,
     displayName: string,
 }
 interface iFormValidation {
+    isFormValid: true,
     emailValid: string,
     passValid: string,
     displayNameValid: string,
 }
 
-const formData = {
-    email: 'alonzo.choque@gmail.com',
-    pass: '1234567',
-    displayName: 'Alonzo Choque',
+// const initialFormState = {
+//     email: 'alonzo.choque@gmail.com',
+//     pass: '1234567',
+//     displayName: 'Alonzo Choque',
+// }
+const initialFormState = {
+    isSubmited: false,
+    email: '',
+    pass: '',
+    displayName: '',
+}
+const initialFormValidation = {
+    isFormValid: true,
     emailValid: '',
     passValid: '',
     displayNameValid: '',
@@ -33,23 +47,27 @@ const formValidations = {
 }
 
 export const RegisterPage = () => {
+    const { status, errorMessage } = useSelector((state: RootState) => state.auth);
+    const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
+    const { formState, onInputChange, onResetForm, onSubmitForm, formValidation } = useForm(initialFormState, initialFormValidation, formValidations);
+    const { isSubmited, email, pass, displayName } = formState as iFormState;
+    const { isFormValid, emailValid, passValid, displayNameValid } = formValidation as iFormValidation
 
-    const { formState, onInputChange, onResetForm, formValidation } = useForm(formData, formValidations);
-    const { email, pass, displayName } = formState as iFormState;
-    // const { emailValid, passValid, displayNameValid } = formValidation as iFormValidation
-
-    //console.log(displayNameValid);
-
+    const dispatch = useDispatch();
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formState);
-        // dispatch(checkingAuthentication(email, pass));
+        onSubmitForm();
+        if (!isFormValid) return;
+
+        dispatch(startCreatingUserWithEmailPassword({ email, pass, displayName }));
     }
 
 
     return (
         <AuthLayout title='Create Account'>
+            <h2>isFormValid : {JSON.stringify(isFormValid)}</h2>
+            <h2>isSubmited : {JSON.stringify(isSubmited)}</h2>
             <form onSubmit={event => onSubmit(event)} >
                 <Grid container>
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -61,8 +79,8 @@ export const RegisterPage = () => {
                             name="displayName"
                             value={displayName}
                             onChange={onInputChange}
-                        // error={displayNameValid.length > 0 ? true : false}
-                        // helperText={displayNameValid}
+                            error={displayNameValid.length > 0 && isSubmited}
+                            helperText={displayNameValid}
                         />
                     </Grid>
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -74,6 +92,8 @@ export const RegisterPage = () => {
                             name="email"
                             value={email}
                             onChange={onInputChange}
+                            error={emailValid.length > 0 && isSubmited}
+                            helperText={emailValid}
                         />
                     </Grid>
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -85,12 +105,17 @@ export const RegisterPage = () => {
                             name="pass"
                             value={pass}
                             onChange={onInputChange}
+                            error={passValid.length > 0 && isSubmited}
+                            helperText={passValid}
                         />
                     </Grid>
-
+                    <Grid item xs={12} sm={12} display={errorMessage != '' ? '' : 'none'}>
+                        <Alert severity='error'>{errorMessage}</Alert>
+                    </Grid>
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
                         <Grid item xs={12} sm={12}>
                             <Button
+                                disabled={isAuthenticating}
                                 type="submit"
                                 variant="contained"
                                 fullWidth>

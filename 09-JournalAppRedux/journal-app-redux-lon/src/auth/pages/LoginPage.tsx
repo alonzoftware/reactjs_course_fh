@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Google from "@mui/icons-material/Google";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { checkingAuthentication,startGoogleSignIn } from '../../store/auth';
+import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth';
 
 interface iFormState {
     email: string,
@@ -14,31 +14,33 @@ interface iFormState {
 }
 
 export const LoginPage = () => {
-const { status } = useSelector((state: RootState) => state.auth);
-const isAuthenticating = useMemo(()=> status === 'checking', [status]);
+    const { status, errorMessage } = useSelector((state: RootState) => state.auth);
+    const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
-const { formState, onInputChange, onResetForm } = useForm({
-    email: 'alonzo.choque@gmail.com', 
-    pass: '1234567'
-});
-const { email, pass } = formState as iFormState;
+    const { formState, onInputChange, onResetForm } = useForm({
+        email: 'alonzo.choque@gmail.com',
+        pass: '1234567'
+    });
+    const { email, pass } = formState as iFormState;
 
-const dispatch = useDispatch();
-// useEffect(() => {
-//     dispatch(getPokemons());
-// }, []);
+    const dispatch = useDispatch();
+    // useEffect(() => {
+    //     dispatch(getPokemons());
+    // }, []);
 
 
 
-const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log ({email, pass});
-    dispatch(checkingAuthentication(email, pass));
-}
-const onGoogleSignIn = ()=>{
-    console.log('onGoogleSignIn')
-    dispatch(startGoogleSignIn());
-}
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log({ email, pass });
+        // dispatch(checkingAuthentication(email, pass));
+        dispatch(startLoginWithEmailPassword({ email, pass }));
+
+    }
+    const onGoogleSignIn = () => {
+        console.log('onGoogleSignIn')
+        dispatch(startGoogleSignIn());
+    }
     return (
         <AuthLayout title='Login'>
             <form onSubmit={event => onSubmit(event)} aria-label="formMain">
@@ -50,7 +52,7 @@ const onGoogleSignIn = ()=>{
                             placeholder='correo@google.com'
                             fullWidth
                             name="email"
-                            value= {email}
+                            value={email}
                             onChange={onInputChange}
                         />
                     </Grid>
@@ -61,26 +63,28 @@ const onGoogleSignIn = ()=>{
                             placeholder='*****'
                             fullWidth
                             name="pass"
-                            value= {pass}
+                            value={pass}
                             onChange={onInputChange}
                         />
                     </Grid>
-
+                    <Grid item xs={12} sm={12} display={errorMessage != '' ? '' : 'none'}>
+                        <Alert severity='error'>{errorMessage}</Alert>
+                    </Grid>
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
                         <Grid item xs={12} sm={6}>
                             <Button
-                            disabled={isAuthenticating} 
-                            type='submit' 
-                            variant="contained" 
-                            fullWidth>
+                                disabled={isAuthenticating}
+                                type='submit'
+                                variant="contained"
+                                fullWidth>
                                 Login
                             </Button>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <Button 
-                            disabled={isAuthenticating} 
-                            onClick={onGoogleSignIn}
-                            variant="contained" fullWidth>
+                            <Button
+                                disabled={isAuthenticating}
+                                onClick={onGoogleSignIn}
+                                variant="contained" fullWidth>
                                 <Google />
                                 <Typography sx={{ ml: 1 }}> Google</Typography>
                             </Button>
