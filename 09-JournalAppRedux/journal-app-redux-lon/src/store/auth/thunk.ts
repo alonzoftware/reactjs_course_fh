@@ -30,7 +30,7 @@ export const startGoogleSignIn = () => {
         dispatch(checkingCredentials());
         const result = await signInWithGoogle();
         if (!result.ok) dispatch (logout({errorMessage : result.errorMessage}));
-        
+        //delete result.ok;
         dispatch(login(
             {
                 uid:result.uid!,
