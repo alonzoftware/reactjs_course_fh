@@ -68,7 +68,9 @@ export const RegisterPage = () => {
         <AuthLayout title='Create Account'>
             <h2>isFormValid : {JSON.stringify(isFormValid)}</h2>
             <h2>isSubmited : {JSON.stringify(isSubmited)}</h2>
-            <form onSubmit={event => onSubmit(event)} >
+            <form
+                onSubmit={event => onSubmit(event)}
+                className="animate__animated animate__fadeIn animate_faster">
                 <Grid container>
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField

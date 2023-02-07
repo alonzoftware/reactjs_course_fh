@@ -1,6 +1,6 @@
 import { AppDispatch, RootState } from "../../store";
 import { checkingCredentials, login, logout } from "./authSlice";
-import { loginWithEmailPassword, registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers';
+import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers';
 
 export const checkingAuthentication = (email = '', pass = '') => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -91,3 +91,12 @@ export const startLoginWithEmailPassword = ({ email = '', pass = '' }) => {
     }
 
 }
+export const startLogout = () => {
+    return async (dispatch: AppDispatch, getState: () => RootState) => {
+        await logoutFirebase();
+        dispatch(logout({ errorMessage: '' }));
+
+    }
+
+}
+

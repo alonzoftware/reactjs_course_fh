@@ -2,7 +2,8 @@ import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 
 export const AuthLayout = ({ children, title = '' }: { children: JSX.Element | JSX.Element[], title: string }) => {
     return (
-        <Grid container
+        <Grid
+            container
             spacing={0}
             direction="column"
             alignItems="center"

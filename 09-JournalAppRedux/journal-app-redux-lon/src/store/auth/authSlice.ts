@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 export interface authState {
     status: string,
     uid: string,
-    email : string,
+    email: string,
     displayName: string,
     photoURL: string,
     errorMessage: string,
@@ -12,9 +12,9 @@ export interface authState {
 }
 
 const initialState: authState = {
-    status: 'not-authenticated', //'checking','not-authenticated', 'authenticated'
+    status: 'checking', //'checking','not-authenticated', 'authenticated'
     uid: '',
-    email : '',
+    email: '',
     displayName: '',
     photoURL: '',
     errorMessage: '',
@@ -25,24 +25,24 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        
-        login: (state, action: PayloadAction<{uid : string, email : string , displayName : string, photoURL : string}>) => {
-            state.status= 'authenticated';
-            state.uid= action.payload.uid;
-            state.email = action.payload.email ;
-            state.displayName= action.payload.displayName;
-            state.photoURL= action.payload.photoURL;
-            state.errorMessage= '';
+
+        login: (state, action: PayloadAction<{ uid: string, email: string, displayName: string, photoURL: string }>) => {
+            state.status = 'authenticated';
+            state.uid = action.payload.uid;
+            state.email = action.payload.email;
+            state.displayName = action.payload.displayName;
+            state.photoURL = action.payload.photoURL;
+            state.errorMessage = '';
         },
-        logout: (state, action: PayloadAction<{errorMessage : string }>) => {
-            state.status= 'not-authenticated';
-            state.uid= '';
+        logout: (state, action: PayloadAction<{ errorMessage: string }>) => {
+            state.status = 'not-authenticated';
+            state.uid = '';
             state.email = '';
-            state.displayName= '';
-            state.photoURL= '';
-            state.errorMessage= action.payload.errorMessage;
+            state.displayName = '';
+            state.photoURL = '';
+            state.errorMessage = action.payload.errorMessage;
         },
-        checkingCredentials: (state) =>{
+        checkingCredentials: (state) => {
             state.status = 'checking';
         }
     },

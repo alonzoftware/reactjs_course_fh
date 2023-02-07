@@ -4,7 +4,7 @@ import { NavBar, SideBar } from "../components";
 const drawerWidth = 280;
 export const JournalLayout = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }} className="animate__animated animate__fadeIn animate_faster">
             {/* Navbar drawerWidth */}
             <NavBar drawerWidth={drawerWidth} />
             <SideBar drawerWidth={drawerWidth} />
