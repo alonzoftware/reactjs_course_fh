@@ -1,7 +1,8 @@
 import { AppDispatch, RootState } from "../store";
 
-export const checkingAuthentication = () => {
+export const startNewNote = () => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
+        console.log('startNewNote');
         // dispatch(checkingCredentials());
 
         // TODO: http request
@@ -20,6 +21,13 @@ export const checkingAuthentication = () => {
 
 
         // dispatch(setPokemons());
+
+        // uid
+        const newNote = {
+            title: '',
+            body: '',
+            date: new Date().getTime(),
+        }
     }
 
 };

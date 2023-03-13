@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { AddOutlined } from "@mui/icons-material";
 import { IconButton, Typography } from "@mui/material";
 import { JournalLayout } from "../layout/JournalLayout";
@@ -6,6 +7,9 @@ import { NothingSelectedView } from "../views/NothingSelectedView";
 // import MailOutline from "@mui/icons-material/MailOutline";
 
 export const JournalPage = () => {
+    const dispatch = useDispatch();
+    const onClickNewNote = () => {
+    }
     return (
         <JournalLayout>
             {/* <Typography variant='h1'>JournalPage</Typography> */}
@@ -25,7 +29,7 @@ export const JournalPage = () => {
                     right: 50,
                     bottom: 50
                 }}>
-                <AddOutlined sx={{ fontSize: 30 }} />
+                <AddOutlined sx={{ fontSize: 30 }} onClick={onClickNewNote} />
             </IconButton>
         </JournalLayout >
     )
