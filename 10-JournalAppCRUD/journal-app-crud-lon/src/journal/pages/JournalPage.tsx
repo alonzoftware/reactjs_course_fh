@@ -4,11 +4,13 @@ import { IconButton, Typography } from "@mui/material";
 import { JournalLayout } from "../layout/JournalLayout";
 import { NoteView } from "../views";
 import { NothingSelectedView } from "../views/NothingSelectedView";
+import { startNewNote } from '../../store/journal';
 // import MailOutline from "@mui/icons-material/MailOutline";
 
 export const JournalPage = () => {
     const dispatch = useDispatch();
     const onClickNewNote = () => {
+        dispatch(startNewNote());
     }
     return (
         <JournalLayout>
@@ -34,3 +36,4 @@ export const JournalPage = () => {
         </JournalLayout >
     )
 }
+
