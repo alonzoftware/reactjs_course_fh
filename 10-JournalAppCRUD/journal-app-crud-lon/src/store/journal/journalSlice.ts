@@ -1,22 +1,24 @@
 import { createSlice, ThunkAction } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+export interface iNote {
+    id: string,
+    title: string,
+    body: string,
+    date: number,
+    imageUrls: Array<string>
+}
+
 export interface JournalState {
     isSaving: boolean,
     messageSaved: string,
-    notes: [],
-    active: {
-        id: string,
-        title: string,
-        body: string,
-        date: number,
-        imageUrls: Array<string>
-    },
+    notes: iNote[],
+    active: iNote,
 
 }
 
 const initialState: JournalState = {
-    isSaving: true,
+    isSaving: false,
     messageSaved: '',
     notes: [],
     active: {
@@ -32,17 +34,18 @@ export const journalSlice = createSlice({
     name: 'journal',
     initialState,
     reducers: {
-        addNewEmptyNote: (state, action: PayloadAction<number>) => {
+        addNewEmptyNote: (state, action: PayloadAction<iNote>) => {
             // state.journal += action.payload
+            state.notes.push(action.payload);
         },
-        setActiveNote: (state, action: PayloadAction<number>) => {
-            // state.journal += action.payload
+        setActiveNote: (state, action: PayloadAction<iNote>) => {
+            state.active = action.payload
         },
         setNotes: (state, action: PayloadAction<number>) => {
             // state.journal += action.payload
         },
-        setSaving: (state) => {
-            // state.journal += action.payload
+        setSaving: (state, action: PayloadAction<boolean>) => {
+            state.isSaving = action.payload;
         },
         updateNote: (state, action: PayloadAction<number>) => {
             // state.journal += action.payload
