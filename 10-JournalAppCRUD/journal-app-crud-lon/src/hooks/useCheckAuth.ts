@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FirebaseAuth } from "../firebase/config";
 import { RootState } from "../store";
 import { login, logout } from "../store/auth";
+import { startLoadingNotes } from "../store/journal";
 
 export const useCheckAuth = () => {
     const { status } = useSelector((state: RootState) => state.auth);
@@ -20,6 +21,7 @@ export const useCheckAuth = () => {
                     photoURL: user.photoURL ?? '',
                 }
             ));
+            dispatch(startLoadingNotes());
         })
     }, []);
     return status
