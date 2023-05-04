@@ -24,6 +24,7 @@ export const startNewNote = () => {
         //console.log({ newDoc, setDocResp });
 
         newNote.id = newDoc.id;
+        console.log(newNote.id);
         dispatch(addNewEmptyNote(newNote));
         dispatch(setActiveNote(newNote));
         dispatch(setSaving(false));

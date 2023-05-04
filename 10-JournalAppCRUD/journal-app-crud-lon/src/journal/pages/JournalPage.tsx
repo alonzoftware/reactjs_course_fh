@@ -25,6 +25,7 @@ export const JournalPage = () => {
                 <NothingSelectedView />
             }
             <IconButton
+                onClick={onClickNewNote}
                 disabled={isSaving}
                 size='large'
                 sx={{
@@ -35,7 +36,7 @@ export const JournalPage = () => {
                     right: 50,
                     bottom: 50
                 }}>
-                <AddOutlined sx={{ fontSize: 30 }} onClick={onClickNewNote} />
+                <AddOutlined sx={{ fontSize: 30 }} />
             </IconButton>
         </JournalLayout >
     )
