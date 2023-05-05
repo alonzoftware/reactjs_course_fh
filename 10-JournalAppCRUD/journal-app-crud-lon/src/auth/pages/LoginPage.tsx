@@ -12,15 +12,15 @@ interface iFormState {
     email: string,
     pass: string,
 }
-
+const formData = {
+    email: 'alonzo.choque@gmail.com',
+    pass: '1234567'
+}
 export const LoginPage = () => {
     const { status, errorMessage } = useSelector((state: RootState) => state.auth);
     const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
-    const { formState, onInputChange, onResetForm } = useForm({
-        email: 'alonzo.choque@gmail.com',
-        pass: '1234567'
-    });
+    const { formState, onInputChange, onResetForm } = useForm(formData);
     const { email, pass } = formState as iFormState;
 
     const dispatch = useDispatch();
