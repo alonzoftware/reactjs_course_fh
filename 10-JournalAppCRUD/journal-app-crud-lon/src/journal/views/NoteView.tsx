@@ -4,18 +4,27 @@ import { ImageGallery } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useForm } from '../../hooks';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { iNote, setActiveNote, startSaveNote } from '../../store/journal';
 
 export const NoteView = () => {
 
-    const { active: note } = useSelector((state: RootState) => state.journal);
     const dispatch = useDispatch();
+    const { active: note } = useSelector((state: RootState) => state.journal);
 
     const { body, title, date, onInputChange, formState } = useForm(note)
     const dateString = useMemo(() => {
         const newDate = new Date(date);
         return newDate.toUTCString();
     }, [date])
+
+    useEffect(() => {
+        dispatch(setActiveNote(formState as iNote));
+    }, [formState])
+
+    const onSaveNote = () => {
+        dispatch(startSaveNote());
+    }
 
     return (
         <Grid
@@ -26,7 +35,9 @@ export const NoteView = () => {
                 <Typography fontSize={39} fontWeight='light'> {dateString}</Typography>
             </Grid>
             <Grid item>
-                <Button color="primary" sx={{ padding: 2 }}>
+                <Button
+                    onClick={onSaveNote}
+                    color="primary" sx={{ padding: 2 }}>
                     <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
                     Save
                 </Button>
