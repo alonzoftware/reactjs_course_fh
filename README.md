@@ -217,3 +217,16 @@ declare module 'redux' {
     }
 }
 ```
+
+# SWEET ALERT 2
+
+https://sweetalert2.github.io/
+
+```console
+$ npm install sweetalert2
+```
+
+```javascript
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+```
