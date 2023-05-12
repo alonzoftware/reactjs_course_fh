@@ -77,8 +77,22 @@ export const journalSlice = createSlice({
             state.isSaving = false;
             state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
         },
-        deleteNoteById: (state, action: PayloadAction<number>) => {
+        deleteNoteById: (state, action: PayloadAction<string>) => {
             // state.journal += action.payload
+            state.active = {
+                id: '',
+                title: '',
+                body: '',
+                date: 0,
+                imageUrls: [],
+            };
+            state.notes = state.notes.filter(note => note.id !== action.payload);
+            //Without REDUX TOOLKIT
+            // return {
+            //     ...state,
+            //     active: null,
+            //     notes: state.notes.filter(note => note.id !== action.payload)
+            // }
         },
 
     },
