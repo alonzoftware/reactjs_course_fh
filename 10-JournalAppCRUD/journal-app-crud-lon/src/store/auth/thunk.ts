@@ -1,6 +1,7 @@
 import { AppDispatch, RootState } from "../../store";
 import { checkingCredentials, login, logout } from "./authSlice";
 import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers';
+import { clearNotesLogout } from "../journal";
 
 export const checkingAuthentication = (email = '', pass = '') => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -94,6 +95,7 @@ export const startLoginWithEmailPassword = ({ email = '', pass = '' }) => {
 export const startLogout = () => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
         await logoutFirebase();
+        dispatch(clearNotesLogout());
         dispatch(logout({ errorMessage: '' }));
 
     }

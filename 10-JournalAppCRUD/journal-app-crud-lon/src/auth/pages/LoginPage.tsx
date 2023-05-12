@@ -13,7 +13,7 @@ interface iFormState {
     pass: string,
 }
 const formData = {
-    email: 'alonzo.choque@gmail.com',
+    email: 'alonzo@g.com',
     pass: '1234567'
 }
 export const LoginPage = () => {

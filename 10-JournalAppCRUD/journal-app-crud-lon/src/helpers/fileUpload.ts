@@ -13,7 +13,7 @@ export const fileUpload = async (file: File) => {
         console.log(resp);
         if (!resp.ok) throw new Error('Problem Uploading Images');
         const cloudResp = await resp.json();
-        console.log(cloudResp);
+        //console.log(cloudResp);
         return cloudResp.secure_url;
     } catch (error: any) {
         console.log(error);
