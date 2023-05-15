@@ -8,9 +8,7 @@ https://vitejs.dev/guide/#trying-vite-online
 npm create vite@latest
 ```
 
-## HOOKS DOCUMENTATION
-
-https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
+- Select Typescript + SWC
 
 # Dependencies
 
@@ -118,8 +116,12 @@ module.exports = {
 
 import fetch
 
-```code
-import 'cross-fetch/polyfill';
+```console
+npm install --save cross-fetch
+```
+
+```javascript
+import "cross-fetch/polyfill";
 ```
 
 change TEST SCRIPT
@@ -138,17 +140,28 @@ https://github.com/alonzoftware/reactjs_course_fh/blob/master/04-GifExpertApp/gi
 https://getbootstrap.com/docs/5.2/getting-started/download/
 
 ```html
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-  crossorigin="anonymous"
-/>
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-  crossorigin="anonymous"
-></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
 ```
 
 # MATERIAL UI
@@ -230,3 +243,7 @@ $ npm install sweetalert2
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 ```
+
+## HOOKS DOCUMENTATION
+
+https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
