@@ -1,4 +1,7 @@
 export const fileUpload = async (file: File) => {
+
+    if (!file) return '';
+
     const cloudUrl = 'https://api.cloudinary.com/v1_1/dm6i6flch/image/upload';
     const formData = new FormData();
     formData.append('upload_preset', 'react-fh');
