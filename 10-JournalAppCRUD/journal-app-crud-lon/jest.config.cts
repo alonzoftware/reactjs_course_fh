@@ -1,8 +1,8 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-    // testEnvironment: "jest-environment-jsdom",
-    testEnvironment: "jest-environment-node",
+    testEnvironment: "jest-environment-jsdom",
+    // testEnvironment: "jest-environment-node",
     // Jest transformations -- this adds support for TypeScript
     // using ts-jest
     // The root of your source code, typically /src
