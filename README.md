@@ -111,17 +111,21 @@ module.exports = {
 
   // Module file extensions for importing
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  // setupFiles: ['./jest.setup.js'],
 };
 ```
 
 import fetch
+Import both libraries and use whichever one works.
 
 ```console
-npm install --save cross-fetch
+npm install --save-dev cross-fetch
+npm install --save-dev whatwg-fetch
 ```
 
 ```javascript
 import "cross-fetch/polyfill";
+import "whatwg-fetch";
 ```
 
 change TEST SCRIPT

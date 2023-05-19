@@ -1,4 +1,4 @@
-import "cross-fetch/polyfill";
+// import "cross-fetch/polyfill";
 export const fileUpload = async (file: File) => {
 
     if (!file) return '';
@@ -15,7 +15,7 @@ export const fileUpload = async (file: File) => {
             method: 'POST',
             body: formData
         });
-        console.log(resp)
+        // console.log(resp);
         if (!resp.ok) throw new Error('Problem Uploading Images');
         const cloudResp = await resp.json();
         //console.log(cloudResp);
