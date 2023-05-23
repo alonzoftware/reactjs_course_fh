@@ -1,7 +1,7 @@
 // import "cross-fetch/polyfill";
 export const fileUpload = async (file: File) => {
-
     if (!file) return '';
+    if (file.size == 0) return '';
 
     const cloudUrl = 'https://api.cloudinary.com/v1_1/dm6i6flch/image/upload';
     const formData = new FormData();

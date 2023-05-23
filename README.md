@@ -128,6 +128,18 @@ import "cross-fetch/polyfill";
 import "whatwg-fetch";
 ```
 
+testing cloudinary requirements
+
+```console
+npm install --save-dev cloudinary
+npm install --save-dev setimmediate
+```
+
+```javascript
+import "setimmediate";
+import { v2 as cloudinary } from "cloudinary";
+```
+
 change TEST SCRIPT
 
 ```json
