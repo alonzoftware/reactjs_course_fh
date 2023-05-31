@@ -25,7 +25,9 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
+        getState: (state) => {
+            //This is only for testing
+        },
         login: (state, action: PayloadAction<{ uid: string, email: string, displayName: string, photoURL: string }>) => {
             state.status = 'authenticated';
             state.uid = action.payload.uid;
@@ -49,4 +51,4 @@ export const authSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, checkingCredentials } = authSlice.actions
+export const { getState, login, logout, checkingCredentials } = authSlice.actions
