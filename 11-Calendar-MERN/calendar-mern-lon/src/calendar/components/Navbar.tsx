@@ -1,4 +1,3 @@
-
 //For ICONS USE CDN FontAwesome in index.html https://cdnjs.com/libraries/font-awesome
 export const Navbar = () => {
     return (

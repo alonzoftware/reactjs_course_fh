@@ -279,3 +279,53 @@ import "sweetalert2/dist/sweetalert2.min.css";
 ## HOOKS DOCUMENTATION
 
 https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect
+
+## REACT BIG CALENDAR
+
+https://github.com/jquense/react-big-calendar
+https://www.npmjs.com/package/react-big-calendar
+
+```console
+> npm install react-big-calendar
+> npm i --save-dev @types/react-big-calendar
+> npm install date date-fns
+```
+
+### Imports
+
+```javascript
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+```
+
+### For Spanish
+
+https://gist.github.com/Klerith/1658fc368898dd673fc5a9a01ccb12ff
+
+```javascript
+export const getMessagesES = () => {
+  return {
+    allDay: "Todo el día",
+    previous: "<",
+    next: ">",
+    today: "Hoy",
+    month: "Mes",
+    week: "Semana",
+    day: "Día",
+    agenda: "Agenda",
+    date: "Fecha",
+    time: "Hora",
+    event: "Evento",
+    noEventsInRange: "No hay eventos en este rango",
+    //showMore: (total: string) => `+ Ver más (${total})`,
+  };
+};
+```
+
+Add culture and getMessages to Calendar object
+
+```javascript
+<Calendar
+  culture="es"
+  messages={getMessagesES()}>
+```
