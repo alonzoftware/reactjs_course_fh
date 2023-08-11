@@ -2,7 +2,7 @@ import { Calendar } from "react-big-calendar"
 import { addHours } from 'date-fns'
 import { localizer, getMessagesES } from "../../helpers"
 
-import { Navbar } from ".."
+import { CalendarEventBox, Navbar } from ".."
 interface iEvent {
     title: string
     notes: string
@@ -31,7 +31,7 @@ const events: iEvent[] = [{
 
 export const CalendarPage = () => {
     const eventStyleGetter = (event: iEvent, start: Date, end: Date, isSelected: boolean) => {
-        console.log(event, start, end, isSelected);
+        //console.log(event, start, end, isSelected);
         const style = {
             backgroundColor: '#347cf7',
             borderRadius: '0px',
@@ -63,6 +63,7 @@ export const CalendarPage = () => {
                 style={{ height: 'calc(100vh - 80px)' }}
                 messages={getMessagesES()}
                 eventPropGetter={eventStyleGetter}
+                components={{ event: CalendarEventBox }}
             />
 
         </>
