@@ -2,7 +2,8 @@ import { Calendar } from "react-big-calendar"
 import { addHours } from 'date-fns'
 import { localizer, getMessagesES } from "../../helpers"
 
-import { CalendarEventBox, Navbar } from ".."
+import { CalendarEventBox, CalendarModal, Navbar } from ".."
+import { useState } from "react"
 interface iEvent {
     title: string
     notes: string
@@ -30,6 +31,10 @@ const events: iEvent[] = [{
 
 
 export const CalendarPage = () => {
+
+    const [lastView, setLastView]: [lastView: any, setLastView: Function] = useState(localStorage.getItem('lastView') || 'month');
+
+
     const eventStyleGetter = (event: iEvent, start: Date, end: Date, isSelected: boolean) => {
         //console.log(event, start, end, isSelected);
         const style = {
@@ -51,21 +56,39 @@ export const CalendarPage = () => {
         }
 
     }
+
+    const onDoubleClick = (event: any) => {
+        console.log({ doubleClick: event });
+    }
+    const onSelect = (event: any) => {
+        console.log({ click: event });
+    }
+    const onViewChange = (event: any) => {
+        // console.log({ viewChanged: event });
+        localStorage.setItem('lastView', event);
+    }
+
+
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar />
             <Calendar
                 culture="es"
                 localizer={localizer}
                 events={events}
+                defaultView={lastView}
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 'calc(100vh - 80px)' }}
                 messages={getMessagesES()}
                 eventPropGetter={eventStyleGetter}
                 components={{ event: CalendarEventBox }}
+                onDoubleClickEvent={onDoubleClick}
+                onSelectEvent={onSelect}
+                onView={onViewChange}
             />
 
+            <CalendarModal />
         </>
     )
 }
