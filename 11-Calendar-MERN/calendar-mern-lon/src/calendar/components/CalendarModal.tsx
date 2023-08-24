@@ -74,11 +74,12 @@ export const CalendarModal = () => {
                     {/* <input className="form-control" placeholder="Fecha inicio" /> */}
                     <DatePicker
                         locale="es"
+                        timeCaption='Hora'
                         selected={formValues.start}
-                        onChange={(event) => onDateChanged(event, 'start')} //only when value has changed
                         className="form-control"
                         showTimeSelect
                         dateFormat="Pp"
+                        onChange={(event) => onDateChanged(event, 'start')} //only when value has changed
                     />
                 </div>
 
@@ -87,12 +88,13 @@ export const CalendarModal = () => {
                     {/* <input className="form-control" placeholder="Fecha inicio" /> */}
                     <DatePicker
                         locale="es"
+                        timeCaption='Hora'
                         minDate={formValues.start}
                         selected={formValues.end}
-                        onChange={(event) => onDateChanged(event, 'end')}//only when value has changed
                         className="form-control"
                         showTimeSelect
                         dateFormat="Pp"
+                        onChange={(event) => onDateChanged(event, 'end')}//only when value has changed
                     />
                 </div>
 
