@@ -1,4 +1,7 @@
-import { addHours } from 'date-fns';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css'
+import '@sweetalert2/theme-bootstrap-4/bootstrap-4.css'
+import { addHours, differenceInSeconds } from 'date-fns';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import DatePicker from "react-datepicker";
@@ -54,6 +57,26 @@ export const CalendarModal = () => {
             }
         )
     }
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const diff = differenceInSeconds(formValues.end, formValues.start);
+        if (isNaN(diff) || diff <= 0) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Problema con las Fechas',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+                // color: '#545454'
+            })
+        }
+
+        if (formValues.title.length <= 0) return;
+        console.log(formValues);
+        // TODO:
+        // Close modal
+        // Remove Errors
+    }
 
     return (
         <Modal
@@ -67,7 +90,7 @@ export const CalendarModal = () => {
         >
             <h1> Nuevo Evento </h1>
             <hr />
-            <form className="container">
+            <form className="container" onSubmit={onSubmit}>
 
                 <div className="form-group mb-2">
                     <label>Fecha y hora inicio</label><br />
