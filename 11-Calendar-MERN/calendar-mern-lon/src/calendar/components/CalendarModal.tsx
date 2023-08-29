@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css'
 import '@sweetalert2/theme-bootstrap-4/bootstrap-4.css'
 import { addHours, differenceInSeconds } from 'date-fns';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Modal from 'react-modal';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,6 +24,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 export const CalendarModal = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [formValues, setFormValues] = useState({
         title: 'Alonzo',
@@ -35,8 +36,16 @@ export const CalendarModal = () => {
     const onCloseModal = () => {
         console.log('Cerrando Modal');
         setIsOpen(false);
-
     }
+
+    const titleClass = useMemo(() => {
+        if (!formSubmitted) return '';
+
+        return (formValues.title.length > 0)
+            ? ''//is-valid
+            : 'is-invalid'
+
+    }, [formValues.title, formSubmitted])
 
     // const onInputChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEventHandler<HTMLTextAreaElement>) => {
     const onInputChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -59,12 +68,13 @@ export const CalendarModal = () => {
     }
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setFormSubmitted(true);
 
         const diff = differenceInSeconds(formValues.end, formValues.start);
         if (isNaN(diff) || diff <= 0) {
             Swal.fire({
-                title: 'Error!',
-                text: 'Problema con las Fechas',
+                title: 'Fechas Incorrectas',
+                text: 'Revise las Fechas',
                 icon: 'error',
                 confirmButtonText: 'Aceptar',
                 // color: '#545454'
@@ -126,7 +136,7 @@ export const CalendarModal = () => {
                     <label>Titulo y notas</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${titleClass}`} //is-valid || is-invalid
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
