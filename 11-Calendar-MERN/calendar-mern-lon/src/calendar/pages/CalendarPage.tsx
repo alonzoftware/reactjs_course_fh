@@ -4,6 +4,7 @@ import { localizer, getMessagesES } from "../../helpers"
 
 import { CalendarEventBox, CalendarModal, Navbar } from ".."
 import { useState } from "react"
+import { useUiStore } from "../../hooks"
 interface iEvent {
     title: string
     notes: string
@@ -31,7 +32,7 @@ const events: iEvent[] = [{
 
 
 export const CalendarPage = () => {
-
+    const { openDateModal } = useUiStore();
     const [lastView, setLastView]: [lastView: any, setLastView: Function] = useState(localStorage.getItem('lastView') || 'month');
 
 
@@ -59,6 +60,7 @@ export const CalendarPage = () => {
 
     const onDoubleClick = (event: any) => {
         console.log({ doubleClick: event });
+        openDateModal();
     }
     const onSelect = (event: any) => {
         console.log({ click: event });
