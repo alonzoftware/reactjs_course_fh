@@ -1,38 +1,40 @@
-import { Calendar } from "react-big-calendar"
-import { addHours } from 'date-fns'
-import { localizer, getMessagesES } from "../../helpers"
+import { Calendar } from "react-big-calendar";
+import { localizer, getMessagesES } from "../../helpers";
 
-import { CalendarEventBox, CalendarModal, Navbar } from ".."
-import { useState } from "react"
-import { useUiStore } from "../../hooks"
-interface iEvent {
-    title: string
-    notes: string
-    start: Date,
-    end: Date,
-    bgColor: string,
-    user: {
-        _id: string,
-        name: string,
-    }
-}
+import { CalendarEventBox, CalendarModal, Navbar } from "..";
+import { useState } from "react";
+import { useUiStore, useCalendarStore } from "../../hooks";
+import { addHours } from 'date-fns';
+import { iEvent } from "../../store";
+// interface iEvent {
+//     title: string
+//     notes: string
+//     start: Date,
+//     end: Date,
+//     bgColor: string,
+//     user: {
+//         _id: string,
+//         name: string,
+//     }
+// }
 
-const events: iEvent[] = [{
-    title: 'Boss Birthday',
-    notes: 'Must Buy a Cake',
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: '#fafafa',
-    user: {
-        _id: '123',
-        name: 'Alonzo',
-    }
+// const events: iEvent[] = [{
+//     title: 'Boss Birthday',
+//     notes: 'Must Buy a Cake',
+//     start: new Date(),
+//     end: addHours(new Date(), 2),
+//     bgColor: '#fafafa',
+//     user: {
+//         _id: '123',
+//         name: 'Alonzo',
+//     }
 
-}]
+// }]
 
 
 export const CalendarPage = () => {
     const { openDateModal } = useUiStore();
+    const { events } = useCalendarStore();
     const [lastView, setLastView]: [lastView: any, setLastView: Function] = useState(localStorage.getItem('lastView') || 'month');
 
 
