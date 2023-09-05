@@ -1,7 +1,3 @@
-
-
-
-
 export const CalendarEventBox = ({ event }: { event: any }) => {
     const { title, user } = event;
 

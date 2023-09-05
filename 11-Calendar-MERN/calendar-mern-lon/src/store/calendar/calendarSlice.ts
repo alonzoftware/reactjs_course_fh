@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { Calendar } from '../../Calendar';
 import { addHours } from 'date-fns';
 export interface iEvent {
+    _id: string
     title: string
     notes: string
     start: Date,
@@ -18,9 +19,25 @@ export interface CalendarState {
     events: iEvent[],
     activeEvent: iEvent,
 }
+const nullEvent: iEvent = {
+    _id: '',
+    title: '',
+    notes: '',
+    start: new Date(),
+    end: addHours(new Date(), 2),
+    bgColor: '#fafafa',
+    user: {
+        _id: '',
+        name: '',
+    }
+
+}
+
+const tempId = new Date().getTime();
 
 const initialState: CalendarState = {
     events: [{
+        _id: `${tempId}`,
         title: 'Boss Birthday',
         notes: 'Must Buy a Cake',
         start: new Date(),
@@ -32,18 +49,7 @@ const initialState: CalendarState = {
         }
 
     }],
-    activeEvent: {
-        title: 'Boss Birthday',
-        notes: 'Must Buy a Cake',
-        start: new Date(),
-        end: addHours(new Date(), 2),
-        bgColor: '#fafafa',
-        user: {
-            _id: '123',
-            name: 'Alonzo',
-        }
-
-    },
+    activeEvent: nullEvent,
 }
 
 export const calendarSlice = createSlice({
@@ -60,11 +66,15 @@ export const calendarSlice = createSlice({
         // decrement: (state) => {
         //     state.calendar -= 1
         // },
-        // incrementByAmount: (state, action: PayloadAction<number>) => {
-        //     state.calendar += action.payload
-        // },
+        onSetActiveEvent: (state, action: PayloadAction<iEvent>) => {
+            state.activeEvent = action.payload
+        },
+        onAddNewEvent: (state, action: PayloadAction<iEvent>) => {
+            state.events.push(action.payload);
+            state.activeEvent = nullEvent
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { } = calendarSlice.actions
+export const { onSetActiveEvent, onAddNewEvent } = calendarSlice.actions
