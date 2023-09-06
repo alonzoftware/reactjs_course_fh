@@ -21,7 +21,9 @@ export const useCalendarStore = () => {
         }
     }
 
-    const deleteEvent = () => {
+    const startDeletingEvent = async () => {
+        //TODO: Send request to Backend
+
         dispatch(onDeleteEvent());
     }
 
@@ -29,10 +31,11 @@ export const useCalendarStore = () => {
         //Properties
         events,
         activeEvent,
+        // hasEventSelected: !!activeEvent, // true or false if null
         //Methods
         setActiveEvent,
         startSavingEvent,
-        deleteEvent,
+        startDeletingEvent,
 
     }
 }

@@ -3,14 +3,15 @@ import { useCalendarStore } from "../../hooks"
 
 export const FabDelete = () => {
 
-    const { deleteEvent } = useCalendarStore();
+    const { startDeletingEvent, activeEvent } = useCalendarStore();
     const handleDelete = () => {
-        deleteEvent();
+        startDeletingEvent();
     }
     return (
         <button
             className="btn btn-danger fab-danger"
             onClick={handleDelete}
+            style={{ display: (activeEvent._id != '' && activeEvent._id != '0') ? '' : 'none' }}
         >
             <i className="fas fa-trash-alt"> </i>
         </button>
