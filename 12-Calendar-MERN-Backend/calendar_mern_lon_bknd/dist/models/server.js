@@ -19,8 +19,8 @@ const fs_1 = __importDefault(require("fs"));
 //----------------------------
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const auth_1 = __importDefault(require("../routes/auth"));
 // import userRoutes from '../routes/user';
-// import authRoutes from '../routes/auth';
 // import managpcsRoutes from '../routes/managpcs';
 // import servStatusRoutes from '../routes/servstatus';
 // import clientsRoutes from '../routes/clients';
@@ -104,11 +104,11 @@ class Server {
         this.app.use((0, cors_1.default)({ credentials: true, origin: true }));
         //Read and Parse JSON BODY
         this.app.use(express_1.default.json());
-        this.app.use(express_1.default.static(process.env.GPONDB_PATH + 'public'));
+        this.app.use(express_1.default.static(process.env.CALMERN_PATH + 'public'));
     }
     routes() {
+        this.app.use(this.apiPaths.authPath, auth_1.default);
         // this.app.use(this.apiPaths.userPath, userRoutes);
-        // this.app.use(this.apiPaths.authPath, authRoutes);
         // this.app.use(this.apiPaths.managpcsPath, managpcsRoutes);
         // this.app.use(this.apiPaths.servStatusPath, servStatusRoutes);
         // this.app.use(this.apiPaths.clientsPath, clientsRoutes);

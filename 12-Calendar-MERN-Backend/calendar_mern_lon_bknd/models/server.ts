@@ -5,8 +5,8 @@ import fs from "fs";
 //----------------------------
 import express, { Application } from 'express';
 import cors from 'cors';
+import authRoutes from '../routes/auth';
 // import userRoutes from '../routes/user';
-// import authRoutes from '../routes/auth';
 // import managpcsRoutes from '../routes/managpcs';
 // import servStatusRoutes from '../routes/servstatus';
 // import clientsRoutes from '../routes/clients';
@@ -108,12 +108,12 @@ class Server {
         //Read and Parse JSON BODY
         this.app.use(express.json());
 
-        this.app.use(express.static(process.env.GPONDB_PATH + 'public'));
+        this.app.use(express.static(process.env.CALMERN_PATH + 'public'));
     }
 
     routes() {
+        this.app.use(this.apiPaths.authPath, authRoutes);
         // this.app.use(this.apiPaths.userPath, userRoutes);
-        // this.app.use(this.apiPaths.authPath, authRoutes);
         // this.app.use(this.apiPaths.managpcsPath, managpcsRoutes);
         // this.app.use(this.apiPaths.servStatusPath, servStatusRoutes);
         // this.app.use(this.apiPaths.clientsPath, clientsRoutes);
