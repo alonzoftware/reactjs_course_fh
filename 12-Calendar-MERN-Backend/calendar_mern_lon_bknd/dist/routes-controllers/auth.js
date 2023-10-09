@@ -17,16 +17,23 @@ const authGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.authGet = authGet;
 const authPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
     res.status(200).json({
         ok: true,
         msg: 'login',
+        email,
+        password,
     });
 });
 exports.authPost = authPost;
 const authPostNew = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, password } = req.body;
     res.status(200).json({
         ok: true,
-        msg: 'registro'
+        msg: 'registro',
+        name,
+        email,
+        password,
     });
 });
 exports.authPostNew = authPostNew;
