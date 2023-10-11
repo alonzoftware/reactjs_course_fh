@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authPostRenew = exports.authPostNew = exports.authPost = exports.authGet = void 0;
+const User_1 = __importDefault(require("../models/User"));
 const authGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({
         ok: true,
@@ -27,14 +31,44 @@ const authPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.authPost = authPost;
 const authPostNew = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password } = req.body;
-    res.status(200).json({
-        ok: true,
-        msg: 'registro',
-        name,
-        email,
-        password,
-    });
+    // const { name, email, password } = req.body;
+    // res.status(200).json({
+    //     ok: true,
+    //     msg: 'registro',
+    //     name,
+    //     email,
+    //     password,
+    // });
+    const { email, password } = req.body;
+    try {
+        let user = yield User_1.default.findOne({ email });
+        if (user) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario ya existe'
+            });
+        }
+        user = new User_1.default(req.body);
+        // Encriptar contraseña
+        // const salt = bcrypt.genSaltSync();
+        // user.password = bcrypt.hashSync( password, salt );
+        yield user.save();
+        // Generar JWT
+        // const token = await generarJWT( user.id, user.name );
+        res.status(201).json({
+            ok: true,
+            uid: user.id,
+            name: user.name,
+            // token
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
 });
 exports.authPostNew = authPostNew;
 const authPostRenew = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
