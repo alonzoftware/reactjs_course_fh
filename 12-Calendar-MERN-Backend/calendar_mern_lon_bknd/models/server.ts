@@ -6,6 +6,7 @@ import fs from "fs";
 import express, { Application } from 'express';
 import cors from 'cors';
 import authRoutes from '../routes/auth';
+import { dbMONGOConnection } from "../database/config";
 // import userRoutes from '../routes/user';
 // import managpcsRoutes from '../routes/managpcs';
 // import servStatusRoutes from '../routes/servstatus';
@@ -77,7 +78,8 @@ class Server {
         //Sockets
         // this.io = require("socket.io")(this.server);
         //DB Connection
-        this.dbMySQLConnection();
+        // this.dbMySQLConnection();
+        this.connectDatabase();
         //Middlewares
         this.middlewares();
         //Routes
@@ -86,22 +88,25 @@ class Server {
         this.sockets();
 
     }
-    async dbMySQLConnection() {
-        try {
-            // await db.authenticate();
-
-            // initModels(db);
-            // console.log(`Database MySQL - ONLINE at : ${convertDateTimeToAppFormat(new Date)}`);
-
-        } catch (err) {
-            if (err instanceof Error) {
-                // ✅ TypeScript knows err is Error
-                console.log(err.message);
-            } else {
-                console.log('Unexpected error', err);
-            }
-        }
+    async connectDatabase() {
+        await dbMONGOConnection();
     }
+    // async dbMySQLConnection() {
+    //     try {
+    //         // await db.authenticate();
+
+    //         // initModels(db);
+    //         // console.log(`Database MySQL - ONLINE at : ${convertDateTimeToAppFormat(new Date)}`);
+
+    //     } catch (err) {
+    //         if (err instanceof Error) {
+    //             // ✅ TypeScript knows err is Error
+    //             console.log(err.message);
+    //         } else {
+    //             console.log('Unexpected error', err);
+    //         }
+    //     }
+    // }
     middlewares() {
         //cors
         this.app.use(cors({ credentials: true, origin: true }));

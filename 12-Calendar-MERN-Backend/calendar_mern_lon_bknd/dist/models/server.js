@@ -20,6 +20,7 @@ const fs_1 = __importDefault(require("fs"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const auth_1 = __importDefault(require("../routes/auth"));
+const config_1 = require("../database/config");
 // import userRoutes from '../routes/user';
 // import managpcsRoutes from '../routes/managpcs';
 // import servStatusRoutes from '../routes/servstatus';
@@ -73,7 +74,8 @@ class Server {
         //Sockets
         // this.io = require("socket.io")(this.server);
         //DB Connection
-        this.dbMySQLConnection();
+        // this.dbMySQLConnection();
+        this.connectDatabase();
         //Middlewares
         this.middlewares();
         //Routes
@@ -81,24 +83,25 @@ class Server {
         //Sockets
         this.sockets();
     }
-    dbMySQLConnection() {
+    connectDatabase() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                // await db.authenticate();
-                // initModels(db);
-                // console.log(`Database MySQL - ONLINE at : ${convertDateTimeToAppFormat(new Date)}`);
-            }
-            catch (err) {
-                if (err instanceof Error) {
-                    // ✅ TypeScript knows err is Error
-                    console.log(err.message);
-                }
-                else {
-                    console.log('Unexpected error', err);
-                }
-            }
+            yield (0, config_1.dbMONGOConnection)();
         });
     }
+    // async dbMySQLConnection() {
+    //     try {
+    //         // await db.authenticate();
+    //         // initModels(db);
+    //         // console.log(`Database MySQL - ONLINE at : ${convertDateTimeToAppFormat(new Date)}`);
+    //     } catch (err) {
+    //         if (err instanceof Error) {
+    //             // ✅ TypeScript knows err is Error
+    //             console.log(err.message);
+    //         } else {
+    //             console.log('Unexpected error', err);
+    //         }
+    //     }
+    // }
     middlewares() {
         //cors
         this.app.use((0, cors_1.default)({ credentials: true, origin: true }));
