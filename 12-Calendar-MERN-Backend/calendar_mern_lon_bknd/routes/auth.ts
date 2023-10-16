@@ -2,6 +2,7 @@ import { Router } from "express";
 import { check } from "express-validator";
 import { authGet, authPost, authPostNew, authPostRenew } from "../routes-controllers";
 import { validateFields } from "../middlewares/validate-fields";
+import { validateJWT } from "../middlewares/validate-jwt";
 // import { validateJWT, validateFields } from "../middlewares";
 // import { authPostLogin, authGetRenew } from '../routes-controllers/auth';
 
@@ -26,7 +27,7 @@ router.post('/new', [
     check('password', 'El password debe ser de minimo 6 letras').isLength({ min: 6 }),
     validateFields,
 ], authPostNew);
-router.post('/renew', [], authPostRenew);
+router.post('/renew', [validateJWT], authPostRenew);
 
 
 export default router;

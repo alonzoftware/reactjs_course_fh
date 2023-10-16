@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import User from "../models/User";
 import { generateJWT } from '../helpers';
+import { IGetSetPropsInfoRequest } from '../interfaces/common_interfaces';
 
 export const authGet = async (req: Request, res: Response) => {
     res.status(200).json({
@@ -112,9 +113,19 @@ export const authPostNew = async (req: Request, res: Response) => {
         });
     }
 }
-export const authPostRenew = async (req: Request, res: Response) => {
-    res.status(200).json({
+export const authPostRenew = async (req: IGetSetPropsInfoRequest, res: Response) => {
+    // res.status(200).json({
+    //     ok: true,
+    //     msg: 'renew',
+    // });
+    const { uid, name } = req as { uid: any, name: String };
+
+    // Generar JWT
+    const token = await generateJWT(uid, name);
+
+    res.json({
         ok: true,
-        msg: 'renew',
-    });
+        uid, name,
+        token
+    })
 }
