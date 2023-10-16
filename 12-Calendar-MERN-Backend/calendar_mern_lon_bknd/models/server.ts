@@ -6,6 +6,7 @@ import fs from "fs";
 import express, { Application } from 'express';
 import cors from 'cors';
 import authRoutes from '../routes/auth';
+import eventsRoutes from '../routes/events';
 import { dbMONGOConnection } from "../database/config";
 // import userRoutes from '../routes/user';
 // import managpcsRoutes from '../routes/managpcs';
@@ -29,11 +30,8 @@ class Server {
     private server;
     // private io: SocketServer;
     private apiPaths = {
-        userPath: "/api/user",
         authPath: "/api/auth",
-        managpcsPath: "/api/managpcs",
-        servStatusPath: "/api/servstatus",
-        clientsPath: "/api/clients",
+        eventsPath: "/api/events",
     }
 
     constructor() {
@@ -118,7 +116,7 @@ class Server {
 
     routes() {
         this.app.use(this.apiPaths.authPath, authRoutes);
-        // this.app.use(this.apiPaths.userPath, userRoutes);
+        this.app.use(this.apiPaths.eventsPath, eventsRoutes);
         // this.app.use(this.apiPaths.managpcsPath, managpcsRoutes);
         // this.app.use(this.apiPaths.servStatusPath, servStatusRoutes);
         // this.app.use(this.apiPaths.clientsPath, clientsRoutes);
